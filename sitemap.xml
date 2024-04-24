@@ -1,123 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/01-introduction.html</loc>
+    <loc>https://NA.github.io/NA/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/02-the-filesystem.html</loc>
+    <loc>https://NA.github.io/NA/02-the-filesystem.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/03-working-with-files.html</loc>
+    <loc>https://NA.github.io/NA/03-working-with-files.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/04-redirection.html</loc>
+    <loc>https://NA.github.io/NA/04-redirection.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/05-writing-scripts.html</loc>
+    <loc>https://NA.github.io/NA/05-writing-scripts.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/06-organization.html</loc>
+    <loc>https://NA.github.io/NA/06-organization.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/404.html</loc>
+    <loc>https://NA.github.io/NA/404.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/CODE_OF_CONDUCT.html</loc>
+    <loc>https://NA.github.io/NA/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/Extra_lesson.html</loc>
+    <loc>https://NA.github.io/NA/Extra_lesson.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/LICENSE.html</loc>
+    <loc>https://NA.github.io/NA/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/aio.html</loc>
+    <loc>https://NA.github.io/NA/index.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/images.html</loc>
+    <loc>https://NA.github.io/NA/instructor/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/index.html</loc>
+    <loc>https://NA.github.io/NA/instructor/02-the-filesystem.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/01-introduction.html</loc>
+    <loc>https://NA.github.io/NA/instructor/03-working-with-files.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/02-the-filesystem.html</loc>
+    <loc>https://NA.github.io/NA/instructor/04-redirection.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/03-working-with-files.html</loc>
+    <loc>https://NA.github.io/NA/instructor/05-writing-scripts.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/04-redirection.html</loc>
+    <loc>https://NA.github.io/NA/instructor/06-organization.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/05-writing-scripts.html</loc>
+    <loc>https://NA.github.io/NA/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/06-organization.html</loc>
+    <loc>https://NA.github.io/NA/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/404.html</loc>
+    <loc>https://NA.github.io/NA/instructor/Extra_lesson.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://NA.github.io/NA/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/Extra_lesson.html</loc>
+    <loc>https://NA.github.io/NA/instructor/index.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/LICENSE.html</loc>
+    <loc>https://NA.github.io/NA/instructor/next-episode.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/aio.html</loc>
+    <loc>https://NA.github.io/NA/instructor/profiles.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/images.html</loc>
+    <loc>https://NA.github.io/NA/instructor/reference.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/index.html</loc>
+    <loc>https://NA.github.io/NA/instructor/shellCheatSheet.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/instructor-notes.html</loc>
+    <loc>https://NA.github.io/NA/next-episode.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/introduction.html</loc>
+    <loc>https://NA.github.io/NA/profiles.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/key-points.html</loc>
+    <loc>https://NA.github.io/NA/reference.html</loc>
   </url>
   <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/next-episode.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/profiles.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/reference.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor/shellCheatSheet.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/instructor-notes.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/key-points.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/next-episode.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/profiles.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/reference.html</loc>
-  </url>
-  <url>
-    <loc>https://jlchang.github.io/2024-05-09-Unix_Shell_pilot/shellCheatSheet.html</loc>
+    <loc>https://NA.github.io/NA/shellCheatSheet.html</loc>
   </url>
 </urlset>
