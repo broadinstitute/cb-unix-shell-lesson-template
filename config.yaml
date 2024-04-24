@@ -14,7 +14,7 @@ carpentry: 'incubator'
 title: 'The Unix Shell (pilot)'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: '2024-04-29'
+created: 
 
 # Comma-separated list of keywords for the lesson
 keywords: 'lesson'
@@ -27,7 +27,7 @@ life_cycle: 'pre-alpha'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/jlchang/2024-05-09-Unix_Shell_pilot'
+source: FIXME
 
 # Default branch of your lesson
 branch: 'main'
