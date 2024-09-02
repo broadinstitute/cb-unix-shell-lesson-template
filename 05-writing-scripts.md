@@ -43,15 +43,15 @@ window.onload = set_page_view_defaults;
 
 We've been able to do a lot of work with files that already exist, but what if we want to write our own files? We're not going to type in a FASTA file, but we'll see as we go through other tutorials, there are a lot of reasons we'll want to write a file, or edit an existing file.
 
-To add text to files, we're going to use a text editor called Nano. We're going to create a file to take notes about what we've been doing with the data files in `~/shell_data/untrimmed_fastq`.
+To add text to files, we're going to use a text editor called Nano. We're going to create a file to take notes about what we've been doing with the data files in `~/untrimmed_fastq`.
 
 This is good practice when working in bioinformatics. We can create a file called `README.txt` that describes the data files in the directory or documents how the files in that directory were generated.  As the name suggests, it's a file that we or others should read to understand the information in that directory.
 
-Let's change our working directory to `~/shell_data/untrimmed_fastq` using `cd`,
+Let's change our working directory to `~/untrimmed_fastq` using `cd`,
 then run `nano` to create a file called `README.txt`:
 
 ```bash
-$ cd ~/shell_data/untrimmed_fastq
+$ cd ~/untrimmed_fastq
 $ nano README.txt
 ```
 
@@ -61,7 +61,7 @@ You should see something like this:
 
 The text at the bottom of the screen shows the keyboard shortcuts for performing various tasks in `nano`. We will talk more about how to interpret this information soon.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+::::::::::::::::::::::::::::::::::::  spoiler
 
 ## Which Editor?
 
@@ -86,7 +86,7 @@ your computer's start menu, the editor may want to save files in your desktop or
 documents directory instead. You can change this by navigating to
 another directory the first time you "Save As..."
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::
 
 Let's type in a few lines of text. Describe what the files in this
 directory are or what you've been doing with them.
@@ -208,10 +208,10 @@ $ ls -l bad-reads-script.sh
 ```
 
 ```output
--rw-r--r-- 1 dcuser dcuser 0 Oct 25 21:46 bad-reads-script.sh
+-rw-rw-r-- 1 jlchang sequence 76 Jun 18 13:33 bad-reads-script.sh
 ```
 
-We see that it says `-rw-r--r--`. This shows that the file can be read by any user and written to by the file owner (you). We want to change these permissions so that the file can be executed as a program. We use the command `chmod` like we did earlier when we removed write permissions. Here we are adding (`+`) executable permissions (`+x`).
+We see that it says `-rw-r--r--`. This shows that the file can be read by any user and written to by the file owner (you) and anyone in the `sequence` group. We want to change these permissions so that the file can be executed as a program. We use the command `chmod` like we did earlier when we removed write permissions. Here we are adding (`+`) executable permissions (`+x`).
 
 ```bash
 $ chmod +x bad-reads-script.sh
@@ -224,10 +224,10 @@ $ ls -l bad-reads-script.sh
 ```
 
 ```output
--rwxr-xr-x 1 dcuser dcuser 0 Oct 25 21:46 bad-reads-script.sh
+-rwxrwxr-x 1 jlchang sequence 76 Jun 18 13:33 bad-reads-script.sh
 ```
 
-Now we see that it says `-rwxr-xr-x`. The `x`'s that are there now tell us we can run it as a program. So, let's try it! We'll need to put `./` at the beginning so the computer knows to look here in this directory for the program.
+Now we see that it says `-rwxrwxr-x`. The `x`'s that are there now tell us we can run it as a program. So, let's try it! We'll need to put `./` at the beginning so the computer knows to look here in this directory for the program.
 
 ```bash
 $ ./bad-reads-script.sh
@@ -235,18 +235,17 @@ $ ./bad-reads-script.sh
 
 The script should run the same way as before, but now we've created our very own computer program!
 
-You will learn more about writing scripts in [a later lesson](https://datacarpentry.org/wrangling-genomics/05-automation).
+You can learn more about writing scripts in [this Data Carpentries lesson](https://datacarpentry.org/wrangling-genomics/05-automation).
 
 ## Moving and Downloading Data
 
-So far, we've worked with data that is pre-loaded on the instance in the cloud. Usually, however,
-most analyses begin with moving data onto the instance. Below we'll show you some commands to
-download data onto your instance, or to move data between your computer and the cloud.
+Often, analyses begin with moving data onto the machine where you'll be running the analysis. Below we'll show you some options for
+downloading data onto a remote server, or to move data between your computer and the cloud.
 
 ### Getting data from the cloud
 
-There are two programs that will download data from a remote server to your local
-(or remote) machine: `wget` and `curl`. They were designed to do slightly different
+There are two programs that will download data from the internet to your local machine
+(or a remote server): `wget` and `curl`. They were designed to do slightly different
 tasks by default, so you'll need to give the programs somewhat different options to get
 the same behaviour, but they are mostly interchangeable.
 
@@ -275,7 +274,7 @@ installed, and tells you what folder it is installed to. If it can't
 find the program you asked for, it returns nothing, i.e. gives you no
 results.
 
-On Mac OSX, you'll likely get the following output:
+On Mac OSX, you might see the following output:
 
 ```bash
 $ which curl
@@ -316,14 +315,14 @@ download the page instead of showing it to us **and** specifies that it should s
 file using the same name it had on the server: species\_EnsemblBacteria.txt
 
 It's important to note that both `curl` and `wget` download to the computer that the
-command line belongs to. So, if you are logged into AWS on the command line and execute
-the `curl` command above in the AWS terminal, the file will be downloaded to your AWS
-machine, not your local one.
+command line belongs to. So, if you are logged into a remote server on the command line and execute
+the `curl` command above in the terminal for the remote machine, the file will be downloaded to 
+the remote machine, not your local one.
 
 ### Moving files between your laptop and your instance
 
 What if the data you need is on your local computer, but you need to get it *into* the
-cloud? There are also several ways to do this, but it's *always* easier
+remote server (or a cloud server)? There are also several ways to do this, but it's *always* easier
 to start the transfer locally. **This means if you're typing into a terminal, the terminal
 should not be logged into your instance, it should be showing your local computer. If you're
 using a transfer program, it needs to be installed on your local machine, not your instance.**
@@ -346,16 +345,16 @@ scp <file I want to move> <where I want to move it>
 ```
 
 Note that you are always running `scp` locally, but that *doesn't* mean that
-you can only move files from your local computer. In order to move a file from your local computer to an AWS instance, the command would look like this:
+you can only move files from your local computer. In order to move a file from your local computer to an remote server, the command would look like this:
 
 ```bash
-$ scp <local file> <AWS instance>
+$ scp <local file> <remote instance>
 ```
 
 To move it back to your local computer, you re-order the `to` and `from` fields:
 
 ```bash
-$ scp <AWS instance> <local file>
+$ scp <remote instance> <local file>
 ```
 
 #### Uploading Data to your Virtual Machine with scp
@@ -363,12 +362,13 @@ $ scp <AWS instance> <local file>
 Open the terminal and use the `scp` command to upload a file (e.g. local\_file.txt) to the dcuser home directory:
 
 ```bash
-$  scp local_file.txt dcuser@ip.address:/home/dcuser/
+$  scp local_file.txt <username>@remote.server.address:~/
 ```
+At Broad, remote servers used for data transfer are xfer1.broadinstitute.org, xfer2.broadinstitute.org and xfer3.broadinstitute.org
 
 #### Downloading Data from your Virtual Machine with scp
 
-Let's download a text file from our remote machine. You should have a file that contains bad reads called ~/shell\_data/scripted\_bad\_reads.txt.
+Let's download a text file from our remote machine. You should have a file that contains bad reads called ~/untrimmed\_fastq/scripted\_bad\_reads.txt.
 
 **Tip:** If you are looking for another (or any really) text file in your home directory to use instead, try:
 
@@ -376,10 +376,10 @@ Let's download a text file from our remote machine. You should have a file that 
 $ find ~ -name *.txt
 ```
 
-Download the bad reads file in ~/shell\_data/scripted\_bad\_reads.txt to your home ~/Download directory using the following command **(make sure you substitute [dcuser@ip.address](mailto:dcuser@ip.address) with your remote login credentials)**:
+Download the bad reads file in ~/untrimmed\_fastq/scripted\_bad\_reads.txt to your home ~/Download directory using the following command **(make sure you substitute <username>@remote.server.address with your remote login credentials)**:
 
 ```bash
-$ scp dcuser@ip.address:/home/dcuser/shell_data/untrimmed_fastq/scripted_bad_reads.txt ~/Downloads
+$ scp <username>@remote.server.address:~/untrimmed_fastq/scripted_bad_reads.txt ~/Downloads
 ```
 
 Remember that in both instances, the command is run from your local machine, we've just flipped the order of the to and from parts of the command.
@@ -393,8 +393,8 @@ to upload data to your virtual machine.
 
 ### PCSP
 
-If you're using a Windows PC without Git Bash, we recommend you use the *PSCP* program.
-This program is from the same suite of tools as the PuTTY program we have been using to connect.
+If you're using a Windows PC without Git Bash, one option is the *PSCP* program.
+This program is from a suite of tools that offers PuTTY, a freeware terminal program.
 
 1. If you haven't done so, download *PSCP* from [http://the.earth.li/~sgtatham/putty/latest/x86/pscp.exe](https://the.earth.li/~sgtatham/putty/latest/x86/pscp.exe)
 2. Make sure the *PSCP* program is somewhere you know on your computer. In this case,
@@ -408,19 +408,19 @@ This program is from the same suite of tools as the PuTTY program we have been u
 > cd Downloads
 ```
 
-5. Locate a file on your computer that you wish to upload (be sure you know the path). Then upload it to your remote machine **(you will need to know your AMI instance address (which starts with ec2), and login credentials)**. You will be prompted to enter a password, and then your upload will begin. **(make sure you substitute 'your-pc-username' for your actual pc username and 'ec2-54-88-126-85.compute-1.amazonaws.com' with your AMI instance address)**
+5. Locate a file on your computer that you wish to upload (be sure you know the path). Then upload it to your remote machine **(you will need to know the name of the remote machine. At Broad, remote servers used for data transfer are xfer1.broadinstitute.org, xfer2.broadinstitute.org and xfer3.broadinstitute.org, and your login credentials)**. You will be prompted to enter a password, and then your upload will begin. **(make sure you substitute 'your-pc-username' for your actual pc username and '<username>@remote.server.address' with your username and a Broad data transfer server address)**
 
 ```bash
-C:\User\your-pc-username\Downloads> pscp.exe local_file.txt dcuser@ec2-54-88-126-85.compute-1.amazonaws.com:/home/dcuser/
+C:\User\your-pc-username\Downloads> pscp.exe local_file.txt <username>@remote.server.address:~/
 ```
 
 ### Downloading Data from your Virtual Machine with PSCP
 
 1. Follow the instructions in the Upload section to download (if needed) and access the *PSCP* program (steps 1-3)
-2. Download the text file to your current working directory (represented by a .) using the following command **(make sure you substitute 'your-pc-username' for your actual pc username and 'ec2-54-88-126-85.compute-1.amazonaws.com' with your AMI instance address)**
+2. Download the text file to your current working directory (represented by a .) using the following command **(make sure you substitute 'your-pc-username' for your actual pc username and '<username>@remote.server.address' with your username and a Broad data transfer server address)**
 
 ```bash
-C:\User\your-pc-username\Downloads> pscp.exe dcuser@ec2-54-88-126-85.compute-1.amazonaws.com:/home/dcuser/shell_data/untrimmed_fastq/scripted_bad_reads.txt .
+C:\User\your-pc-username\Downloads> pscp.exe <username>@remote.server.address:~/untrimmed_fastq/scripted_bad_reads.txt .
 
 C:\User\your-pc-username\Downloads
 ```
