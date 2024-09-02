@@ -43,12 +43,30 @@ nucleotide at that position in the DNA sequence.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-We'll search for strings inside of our fastq files. Let's first make sure we are in the correct
-directory:
+We'll search for strings inside of our fastq files. Usually, it's best to minimize the number of copies of data so there's a single "source of truth" to reference. For this workshop, we're going to have you make a link to the files in your home directory. Soft links (using `ln -s`) can be thought of as an alias or shortcut to data at a different physical location. 
 
 ```bash
-$ cd ~/shell_data/untrimmed_fastq
+$ cd 
+$ mkdir untrimmed_fastq
+$ cd untrimmed_fastq
+$ ln -s /broad/hptmp/computing_basics/untrimmed_fastq/SRR098026.fastq SRR098026.fastq
+$ ln -s /broad/hptmp/computing_basics/untrimmed_fastq/SRR097977.fastq SRR097977.fastq
 ```
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## What if /broad/hptmp/computing_basics is missing?
+
+Download `untrimmed_fastq.zip` to your home directory and unpack it.
+
+```bash
+$ cd
+wget https://github.com/jlchang/2024-05-09-Unix_Shell_pilot/raw/main/learners/files/untrimmed_fastq.zip
+$ unzip untrimmed_fastq.zip
+$ cd untrimmed_fastq
+```
+
+::::::::::::::::::::::::::::::::::::::::::
 
 Suppose we want to see how many reads in our file have really bad segments containing 10 consecutive unknown nucleotides (Ns).
 
@@ -174,6 +192,41 @@ in our FASTQ files that contain
 $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
 ```
 
+:::::::::::::::::::::::::::::::  spoiler
+
+## No such file or directory
+
+If you see something similar to
+
+```output
+grep: SRR098026.fasta: No such file or directory
+```
+
+grep is telling you it couldn't find the specified file. Take a close look at the error message. Grep was asked to look for a `fasta` file instead of `fastq`... No wonder grep was confused!
+
+
+::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::  spoiler
+
+## Permission denied !?!
+
+If you're seeing
+
+```output
+-bash: bad_reads.txt: Permission denied
+```
+
+your current working directory is probably `/broad/hptmp/computing_basics/untrimmed_fastq` and not `~/untrimmed_fastq`
+
+you can use the following command to _p_rint your _w_orking _d_irectory
+
+```bash
+pwd
+```
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## File extensions
@@ -195,14 +248,14 @@ We can check the number of lines in our new file using a command called `wc`.
 in a file. The FASTQ file may change over time, so given the potential for updates,
 make sure your file matches your instructor's output.
 
-As of Sept. 2020, wc gives the following output:
+For our copy of these fastq files, wc gives the following output:
 
 ```bash
 $ wc bad_reads.txt
 ```
 
 ```output
-  802    1338   24012 bad_reads.txt
+  537  1073 23217 bad_reads.txt
 ```
 
 This will tell us the number of lines, words and characters in the file. If we
@@ -213,7 +266,7 @@ $ wc -l bad_reads.txt
 ```
 
 ```output
-802 bad_reads.txt
+537 bad_reads.txt
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -246,11 +299,11 @@ Note, this will do integer division - if you need floating point arithmetic you 
 
 
 ```bash
-$ echo "996/4" | bc
+$ echo "996/7" | bc -l
 ```
 
 ```output
-249
+142.28571428571428571428
 ```
 
 :::::::::::::::::::::::::
@@ -292,7 +345,7 @@ $ wc -l bad_reads.txt
 ```
 
 ```output
-802 bad_reads.txt
+537 bad_reads.txt
 ```
 
 ```bash
@@ -317,7 +370,7 @@ $ wc -l bad_reads.txt
 ```
 
 ```output
-802 bad_reads.txt
+537 bad_reads.txt
 ```
 
 ```bash
@@ -326,7 +379,7 @@ $ wc -l bad_reads.txt
 ```
 
 ```output
-802 bad_reads.txt
+537 bad_reads.txt
 ```
 
 The output of our second call to `wc` shows that we have not overwritten our original data.
@@ -339,7 +392,7 @@ $ wc -l bad_reads.txt
 ```
 
 ```output
-802 bad_reads.txt
+537 bad_reads.txt
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -352,7 +405,8 @@ and then ran the command above using a `.fastq` extension instead of a `.txt` ex
 would give us a warning.
 
 ```bash
-grep -B1 -A2 NNNNNNNNNN *.fastq > bad_reads.fastq
+$ touch bad_reads.fastq # to simulate having an existing bad_reads.fastq file
+$ grep -B1 -A2 NNNNNNNNNN *.fastq > bad_reads.fastq
 ```
 
 ```output
@@ -360,7 +414,7 @@ grep: input file ‘bad_reads.fastq' is also the output
 ```
 
 `grep` is letting you know that the output file `bad_reads.fastq` is also included in your
-`grep` call because it matches the `*.fastq` pattern. Be careful with this as it can lead to
+`grep` call because it matches the `*.fastq` pattern. Be careful with this file extension gotcha as it can lead to
 some unintended results.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -414,7 +468,6 @@ $ tail bad_reads.txt
 ANNNNNNNNNTTCAGCGACTNNNNNNNNNNGTNGN
 +SRR098026.133 HWUSI-EAS1599_1:2:1:0:1978 length=35
 #!!!!!!!!!##########!!!!!!!!!!##!#!
---
 --
 @SRR098026.177 HWUSI-EAS1599_1:2:1:1:2025 length=35
 CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
@@ -514,13 +567,11 @@ $ echo foo is ${foo}EFG      # now it works!
 foo is abcEFG
 ```
 
-Let's write a for loop to show us the first two lines of the fastq files we downloaded earlier. You will notice the shell prompt changes from `$` to `>` and back again as we were typing in our loop. The second prompt, `>`, is different to remind us that we haven't finished typing a complete command yet. A semicolon, `;`, can be used to separate two commands written on a single line.
+Let's write a for loop to show us the first two lines of the fastq files we linked to earlier. You will notice the shell prompt changes from `$` to `>` and back again as we were typing in our loop. The second prompt, `>`, is different to remind us that we haven't finished typing a complete command yet. A semicolon, `;`, can be used to separate two commands written on a single line.
+
 
 ```bash
-$ cd ../untrimmed_fastq/
-```
-
-```bash
+$ rm bad_reads.fastq         # lets get rid of this file extension "gotcha" file
 $ for filename in *.fastq
 > do
 > head -n 2 ${filename}
@@ -529,9 +580,18 @@ $ for filename in *.fastq
 
 The for loop begins with the formula `for <variable> in <group to iterate over>`. In this case, the word `filename` is designated
 as the variable to be used over each iteration. In our case `SRR097977.fastq` and `SRR098026.fastq` will be substituted for `filename`
-because they fit the pattern of ending with .fastq in the directory we've specified. The next line of the for loop is `do`. The next line is
-the code that we want to execute. We are telling the loop to print the first two lines of each variable we iterate over. Finally, the
-word `done` ends the loop.
+because they fit the pattern of ending with .fastq in the directory we've specified.  
+
+The next line of the for loop is `do`. Followed by a line with the
+the code that we want to execute. We are telling the loop to print the first two lines of each variable we iterate over.  
+
+Finally, the word `done` ends the loop.
+
+You can also write your for loop all on one line, adding a semicolon before the key words `do` and `done`, like so:
+
+```bash
+$ for filename in *.fastq; do head -n 2 ${filename}; done
+```
 
 After executing the loop, you should see the first two lines of both fastq files printed to the terminal. Let's create a loop that
 will save this information to a file.
@@ -541,6 +601,11 @@ $ for filename in *.fastq
 > do
 > head -n 2 ${filename} >> seq_info.txt
 > done
+```
+
+alternate one-liner:
+```bash
+$ for filename in *.fastq; do head -n 2 ${filename} >> seq_info.txt; done
 ```
 
 When writing a loop, you will not be able to return to previous lines once you have pressed Enter. Remember that we can cancel the current command using
@@ -583,9 +648,14 @@ Inside our for loop, we create a new name variable. We call the basename functio
 ```bash
 $ for filename in *.fastq
 > do
-> name=$(basename ${filename} .fastq)
+> name=$(basename ${filename}.fastq)
 > echo ${name}
 > done
+```
+
+For this alternate one-liner, notice we also separate commands in the `do` clause with semicolons:
+```bash
+$ for filename in *.fastq; do name=$(basename ${filename}.fastq); echo ${name}; done
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -606,6 +676,10 @@ $ for filename in *.txt
 > done
 ```
 
+alternate one-liner:
+```bash
+$ for filename in *.txt; do name=$(basename ${filename} .txt); echo ${name}; done
+```
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -616,28 +690,35 @@ One way this is really useful is to move files. Let's rename all of our .txt fil
 $ for filename in *.txt
 > do
 > name=$(basename ${filename} .txt)
-> mv ${filename}  ${name}_2019.txt
+> mv ${filename} ${name}_2024.txt
 > done
 ```
 
+alternate one-liner:
+```bash
+$ for filename in *.txt; do name=$(basename ${filename} .txt); mv ${filename} ${name}_2024.txt; done
+```
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Exercise
 
-Remove `_2019` from all of the `.txt` files.
+Remove `_2024` from all of the `.txt` files.
 
 :::::::::::::::  solution
 
 ## Solution
 
 ```bash
-$ for filename in *_2019.txt
+$ for filename in *_2024.txt
 > do
-> name=$(basename ${filename} _2019.txt)
+> name=$(basename ${filename} _2024.txt)
 > mv ${filename} ${name}.txt
 > done
 ```
-
+alternate one-liner:
+```bash
+$ for filename in *_2024.txt; do name=$(basename ${filename} _2024.txt); mv ${filename} ${name}.txt; done
+```
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
